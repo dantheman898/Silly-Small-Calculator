@@ -1,0 +1,21 @@
+.calculator{
+    border: 5px solid black;
+    padding: 10px;
+    border-radius: 25px;
+    display: inline-block;
+}
+
+#output{
+    border: 5px solid green;
+    
+}
+.number{
+    font-size: 12px;
+    background-color: lightblue;
+    color: black;
+    border-width:3px;
+    border-radius: 25px;
+    margin: 3px;
+    width: 35px;
+    height:35px;
+}
