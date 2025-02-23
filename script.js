@@ -2,9 +2,12 @@ const text = document.getElementById('output');
 var currentInput = '';
 var previousInput='';
 var operator = null;
+var lastOperator= null;
 var lastActionWasEquals = false;
-
-
+var lastResult = 0;
+var num1;
+var num2;
+var save;
 document.querySelectorAll('.number').forEach(button=>{
     button.addEventListener('click',()=>{
         if (operator) { // Only remove highlight if an operator was previously selected
@@ -31,8 +34,13 @@ document.querySelectorAll('.operator').forEach(button =>{
 
         // Store the new operator **after** calculation
         operator = button.innerText;
+        if (operator!='='){
+            lastOperator=operator
+        }
+        
         previousInput = currentInput;
         currentInput = "";
+        lastActionWasEquals=false;
     });
 });
 
@@ -42,9 +50,9 @@ document.getElementById('equals').addEventListener('click',()=>{
         calculate(); 
         document.querySelectorAll('.operator').forEach(button=>button.classList.remove('active'));
     }
+    // save = num2;
+    total;
     lastActionWasEquals=true;
-    
-    
 });
 
 document.querySelector('.clear').addEventListener('click',()=>{
@@ -63,16 +71,45 @@ document.querySelector('.decimal').addEventListener('click',()=>{
     }
 });
 
+
+
+
+function doubleEquals(num1,num2,lastOperator){
+    switch(lastOperator){
+        case '+':
+            total=num1+num2;
+            break;
+        case '-':
+            total=num1-num2;
+            break;
+        case 'X':
+            total=num1*num2;
+            break;
+        case '/':
+            total = num1/num2;
+            break;
+    }
+    currentInput=total.toString();
+    text.value = total;
+
+}
+
+
 let total = 0;
 function calculate(){
     
     if(lastActionWasEquals==true){
-        var num1=total;
+        num1=total;
+        num2=save;
+        doubleEquals(num1,num2,lastOperator);
+        return;
     }
     else{
-    var num1 = parseFloat(previousInput);
+        num1 = parseFloat(previousInput);
+        save=num2;
+        num2 = parseFloat(currentInput);
     }
-    const num2 = parseFloat(currentInput);
+        
 
     switch(operator){
         case '+':
@@ -90,7 +127,7 @@ function calculate(){
     }
     currentInput=total.toString();
     text.value = total;
-    operator = null;
+    // operator = null;
     
 }
 
