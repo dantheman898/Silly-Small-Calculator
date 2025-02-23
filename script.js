@@ -15,6 +15,7 @@ document.querySelectorAll('.number').forEach(button=>{
         }
         currentInput+=button.innerText;
         text.value=currentInput;
+        lastActionWasEquals=false;
     });
 });
 
@@ -36,11 +37,12 @@ document.querySelectorAll('.operator').forEach(button =>{
         operator = button.innerText;
         if (operator!='='){
             lastOperator=operator
+            lastActionWasEquals=false;
         }
         
         previousInput = currentInput;
         currentInput = "";
-        lastActionWasEquals=false;
+        
     });
 });
 
@@ -50,8 +52,8 @@ document.getElementById('equals').addEventListener('click',()=>{
         calculate(); 
         document.querySelectorAll('.operator').forEach(button=>button.classList.remove('active'));
     }
-    // save = num2;
-    total;
+    previousInput=total.toString();
+    currentInput="";
     lastActionWasEquals=true;
 });
 
@@ -69,6 +71,7 @@ document.querySelector('.decimal').addEventListener('click',()=>{
     currentInput+='.';
     text.value=currentInput;
     }
+    lastActionWasEquals = false;
 });
 
 
