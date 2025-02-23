@@ -30,10 +30,10 @@ document.querySelectorAll('.operator').forEach(button =>{
         // Remove highlight from all operators
         document.querySelectorAll('.operator').forEach(btn => btn.classList.remove('active'));
 
-        // Add highlight to the new operator
+        
         button.classList.add('active');
 
-        // Store the new operator **after** calculation
+      
         operator = button.innerText;
         if (operator!='='){
             lastOperator=operator
@@ -47,7 +47,7 @@ document.querySelectorAll('.operator').forEach(button =>{
 });
 
 
-document.getElementById('equals').addEventListener('click',()=>{
+document.querySelector('.equals').addEventListener('click',()=>{
     if(operator && previousInput){
         calculate(); 
         document.querySelectorAll('.operator').forEach(button=>button.classList.remove('active'));
@@ -75,8 +75,6 @@ document.querySelector('.decimal').addEventListener('click',()=>{
 });
 
 
-
-
 function doubleEquals(num1,num2,lastOperator){
     switch(lastOperator){
         case '+':
@@ -94,16 +92,14 @@ function doubleEquals(num1,num2,lastOperator){
     }
     currentInput=total.toString();
     text.value = total;
-
 }
-
 
 let total = 0;
 function calculate(){
     
     if(lastActionWasEquals==true){
         num1=total;
-        num2=save;
+        save=num2;
         doubleEquals(num1,num2,lastOperator);
         return;
     }
@@ -113,7 +109,6 @@ function calculate(){
         num2 = parseFloat(currentInput);
     }
         
-
     switch(operator){
         case '+':
             total =num1+num2;

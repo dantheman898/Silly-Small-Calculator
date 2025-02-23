@@ -16,40 +16,39 @@
     height:450px;
     box-sizing: border-box;
 }
-
 #output{
     border: 2px solid black;
-    font-size:26px;
+    font-size:38px;
     text-align: right;
     grid-column: span 3;
     border-radius: 5px;
-    width: 90%;
-    height:50px;
+    width: 100%;
+    height:85%;
     /* margin-bottom:5px; */
 }
-
-.number, .operator, .decimal{
+.number, .operator, .decimal, .equals{
     font-weight: bold;
+    font-size: 23px;
     height:75%;
     width: 75%;
     border-radius: 7%;
 }
 .number, .decimal{
     background-color: lightblue;
+    font-family: sans-serif;
 }
-.operator{
+.operator,.equals{
     background-color: lightgreen;
 }
 .operator.active{
     background-color:red ;
     border: 2px solid black;
 }
-
 .clear{
     background-color: orange;
     font-weight: bold;
     grid-column: 4;
-    height:40px;
+    height:50%;
     width :60%;
     border-radius:7%;
 }
