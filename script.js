@@ -51,7 +51,7 @@ document.querySelectorAll('.operator').forEach(button =>{
 
 
 document.querySelector('.equals').addEventListener('click',()=>{
-    if(equalWasActivated){
+    if(equalWasActivated && !lastActionWasEquals){
         total = parseFloat(total);
         currentInput=parseFloat(currentInput);
         switch(lastOperator){
