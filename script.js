@@ -4,6 +4,7 @@ var previousInput='';
 var operator = null;
 var lastOperator= null;
 var lastActionWasEquals = false;
+var equalWasActivated = false;
 var lastResult = 0;
 var num1;
 var num2;
@@ -23,10 +24,12 @@ document.querySelectorAll('.number').forEach(button=>{
 document.querySelectorAll('.operator').forEach(button =>{
     button.addEventListener('click',()=>{
         // Perform calculation only if there was a previous input
-        if (operator && previousInput){
-            calculate();
+        //this outer if statement might be wrong?
+        if (!lastActionWasEquals){
+            if (operator && previousInput){
+                calculate();
+            }
         }
-
         // Remove highlight from all operators
         document.querySelectorAll('.operator').forEach(btn => btn.classList.remove('active'));
 
@@ -48,20 +51,43 @@ document.querySelectorAll('.operator').forEach(button =>{
 
 
 document.querySelector('.equals').addEventListener('click',()=>{
+    if(equalWasActivated){
+        total = parseFloat(total);
+        currentInput=parseFloat(currentInput);
+        switch(lastOperator){
+
+            case '+':
+                total=total+currentInput;
+                break;
+            case '-':
+                total=total-currentInput;
+                break;
+            case 'X':
+                total=total*currentInput;
+                break;
+            case '/':
+                total = total/currentInput;
+                break;
+        }
+        currentInput=total.toString();
+        text.value = total;
+    }
     if(operator && previousInput){
         calculate(); 
         document.querySelectorAll('.operator').forEach(button=>button.classList.remove('active'));
     }
     previousInput=total.toString();
     currentInput="";
+    equalWasActivated=true;
     lastActionWasEquals=true;
 });
 
 document.querySelector('.clear').addEventListener('click',()=>{
     document.querySelectorAll('.operator').forEach(button=>button.classList.remove('active'));
     lastActionWasEquals = false;
-    currentInput=''
-    previousInput=''
+    equalWasActivated=false;
+    currentInput='';
+    previousInput='';
     operator = null;
     text.value='';
 });
@@ -96,6 +122,11 @@ function doubleEquals(num1,num2,lastOperator){
 
 let total = 0;
 function calculate(){
+    // if(equalWasActivated){
+    //     num1=total;
+    //     save=num2;
+    //     activatedEqualCalc();
+    // }
     
     if(lastActionWasEquals==true){
         num1=total;
